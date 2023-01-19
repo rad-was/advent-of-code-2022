@@ -5,7 +5,7 @@
 
 void partOne()
 {
-    std::ifstream infile("/Users/rad/Developer/advent-of-code-2022/src/input.txt");
+    std::ifstream infile("input.txt");
     std::string line;
     std::string compartment1, compartment2;
     int sum = 0;
@@ -29,7 +29,7 @@ void partOne()
 
 void partTwo()
 {
-    std::ifstream infile("/Users/rad/Developer/advent-of-code-2022/src/input.txt");
+    std::ifstream infile("input.txt");
     std::string line;
     std::string group[3] = {};
     bool groupFull = false;
