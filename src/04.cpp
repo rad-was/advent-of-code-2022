@@ -9,7 +9,7 @@ int main()
 {
     std::ifstream infile("input.txt");
     std::string line;
-    int counter;
+    int counter1 = 0, counter2 = 0;
 
     while (std::getline(infile, line)) {
         std::replace(line.begin(), line.end(), ',', ' ');
@@ -27,8 +27,14 @@ int main()
         int elf2Begin = std::stoi(vec[2]);
         int elf2End = std::stoi(vec[3]);
 
-        if ((elf1Begin >= elf2Begin and elf1End <= elf2End) or (elf2Begin >= elf1Begin and elf2End <= elf1End))
-            counter++;
+        if ((elf1Begin >= elf2Begin and elf1End <= elf2End) or (elf2Begin >= elf1Begin and elf2End <= elf1End)) {
+            counter1++;
+            counter2++;
+            continue;
+        }
+        if ((elf1End >= elf2Begin and elf1End <= elf2End) or (elf1Begin <= elf2End and elf1End >= elf2End))
+            counter2++;
     }
-    std::cout << counter << std::endl;
+    std::cout << "Part one: " << counter1 << std::endl;
+    std::cout << "Part two: " << counter2 << std::endl;
 }
