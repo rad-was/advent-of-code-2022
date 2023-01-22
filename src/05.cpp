@@ -58,7 +58,10 @@ std::vector<std::string> getInstructions(std::ifstream &infile)
     return vec;
 }
 
-void moveCrates(std::vector<std::vector<char>> &stacks, std::vector<std::string> &instructions)
+void moveCrates(
+        std::vector<std::vector<char>> &stacks1,
+        std::vector<std::vector<char>> &stacks2,
+        std::vector<std::string> &instructions)
 {
     for (auto &line : instructions) {
         // Get integers from each line and save them in a vector
@@ -78,10 +81,15 @@ void moveCrates(std::vector<std::vector<char>> &stacks, std::vector<std::string>
         int to = numbers[2] - 1;
 
         // Move crates
+        int counter = howMany - 1;
         for (int i = 0; i < howMany; ++i) {
-            stacks[to].resize(stacks[to].size() + 1);
-            stacks[to].insert(stacks[to].begin(), stacks[from][0]);
-            stacks[from].erase(stacks[from].begin());
+            stacks1[to].insert(stacks1[to].begin(), stacks1[from][0]);
+            stacks1[from].erase(stacks1[from].begin());
+            stacks2[to].insert(stacks2[to].begin(), stacks2[from][counter]);
+            counter--;
+        }
+        for (int i = 0; i < howMany; ++i) {
+            stacks2[from].erase(stacks2[from].begin());
         }
     }
 }
@@ -91,16 +99,22 @@ int main()
     std::ifstream infile;
     infile.open("input.txt");
 
-    std::vector<std::vector<char>> stacks = getStacks(infile);
+    std::vector<std::vector<char>> stacks1 = getStacks(infile);
+    std::vector<std::vector<char>> stacks2 = stacks1;
     std::vector<std::string> instructions = getInstructions(infile);
 
     infile.close();
 
-    moveCrates(stacks, instructions);
+    moveCrates(stacks1, stacks2, instructions);
 
-    // Print the result
+    // Print the results
     std::cout << "Part one: ";
-    for (auto &row : stacks) {
+    for (auto &row : stacks1) {
+        std::cout << row[0];
+    }
+    std::cout << std::endl;
+    std::cout << "Part two: ";
+    for (auto &row : stacks2) {
         std::cout << row[0];
     }
     std::cout << std::endl;
