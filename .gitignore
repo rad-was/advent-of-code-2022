@@ -1,1 +1,6 @@
 .DS_Store
+/cmake-build-debug/
+/src/input.txt
+/src/test.txt
+/CMakeLists.txt
+/.idea
