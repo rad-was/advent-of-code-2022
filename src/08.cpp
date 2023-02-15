@@ -54,7 +54,6 @@ int findVisible(std::vector<std::vector<int>> &v) {
                 else
                     counter++;
                 if (counter == i) {
-                    //std::cout << i << ' ' << j << "    " << v[i][j] << std::endl;
                     visibleTrees++;
                     isVisible = true;
                 }
@@ -72,7 +71,6 @@ int findVisible(std::vector<std::vector<int>> &v) {
                 else
                     counter++;
                 if (counter + i == v.size() - 1) {
-                    //std::cout << i << ' ' << j << "    " << v[i][j] << std::endl;
                     visibleTrees++;
                     isVisible = true;
                 }
@@ -90,7 +88,6 @@ int findVisible(std::vector<std::vector<int>> &v) {
                 else
                     counter++;
                 if (counter + j == v[i].size() - 1) {
-                    //std::cout << i << ' ' << j << "    " << v[i][j] << std::endl;
                     visibleTrees++;
                     isVisible = true;
                 }
@@ -108,7 +105,6 @@ int findVisible(std::vector<std::vector<int>> &v) {
                 else
                     counter++;
                 if (counter == j) {
-                    //std::cout << i << ' ' << j << "    " << v[i][j] << std::endl;
                     visibleTrees++;
                     isVisible = true;
                 }
@@ -125,7 +121,7 @@ int findVisible(std::vector<std::vector<int>> &v) {
 
 int main()
 {
-    std::ifstream infile("/Users/rad/Developer/advent-of-code-2022/src/input.txt");
+    std::ifstream infile("input.txt");
 
     int rows;
     int cols;
