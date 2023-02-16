@@ -119,6 +119,68 @@ int findVisible(std::vector<std::vector<int>> &v) {
     return visibleTrees;
 }
 
+int findBestSpot(std::vector<std::vector<int>> &v) {
+    int topScore = 0;
+    // For every element in matrix
+    for (int i = 1; i < v.size() - 1; ++i) {
+        for (int j = 1; j < v[i].size() - 1; ++j) {
+            int scenicScore = 1;
+            int viewingDistance = 0;
+
+            // From the top
+            for (int k = i - 1; k >= 0; --k) {
+                if (v[k][j] >= v[i][j]) {
+                    viewingDistance++;
+                    break;
+                } else {
+                    viewingDistance++;
+                }
+            }
+            scenicScore *= viewingDistance;
+            viewingDistance = 0;
+
+            // From the bottom
+            for (int k = i + 1; k < v.size(); ++k) {
+                if (v[k][j] >= v[i][j]) {
+                    viewingDistance++;
+                    break;
+                } else {
+                    viewingDistance++;
+                }
+            }
+            scenicScore *= viewingDistance;
+            viewingDistance = 0;
+
+            // From the right
+            for (int k = j + 1; k < v[i].size(); ++k) {
+                if (v[i][k] >= v[i][j]) {
+                    viewingDistance++;
+                    break;
+                } else {
+                    viewingDistance++;
+                }
+            }
+            scenicScore *= viewingDistance;
+            viewingDistance = 0;
+
+            // From the left
+            for (int k = j - 1; k >= 0; --k) {
+                if (v[i][k] >= v[i][j]) {
+                    viewingDistance++;
+                    break;
+                } else {
+                    viewingDistance++;
+                }
+            }
+            scenicScore *= viewingDistance;
+
+            if (scenicScore > topScore)
+                topScore = scenicScore;
+        }
+    }
+    return topScore;
+}
+
 int main()
 {
     std::ifstream infile("input.txt");
@@ -130,7 +192,8 @@ int main()
     std::vector<std::vector<int>> vec(rows, std::vector<int> (cols, 0));
 
     fileToMatrix(infile, vec);
-    std::cout << findVisible(vec) << std::endl;
+    std::cout << "Part one: " << findVisible(vec) << std::endl;
+    std::cout << "Part two: " << findBestSpot(vec) << std::endl;
 
     infile.close();
 }
